@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+    /* colores */
+    --main-color: #111827;
+    --main-text-color: #F9FAFB;
+    --acentos: #3B82F6;
+    --borde-suave: #f9fafb50;
+    /* tipografía */
+    --main-font: 'Inter', sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--main-color);
+    font-family: var(--main-font);
+}
+
+header {
+    display: flex;
+    border-bottom: 1px solid var(--borde-suave);
+    width: 100vw;
+    height: 60px;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+    width: 60%;
+    margin: auto;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: var(--main-text-color);
+    font-size: 20px;
+    font-weight: var(--font-weight-bold);
+}
+
+.buscador-container {
+    flex-grow: 1;
+    margin-left: 24px;
+}
+
+.buscador {
+    width: 100%;
+    padding: 8px 16px;
+    border: 1px solid var(--borde-suave);
+    border-radius: 8px;
+    background-color: var(--main-color);
+    color: var(--main-text-color);
+    font-size: 16px;
+}
+
+.buscador::placeholder {
+    color: var(--borde-suave);
+}
+
+.buscador:focus {
+    outline: none;
+}
