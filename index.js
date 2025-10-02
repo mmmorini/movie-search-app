@@ -14,6 +14,33 @@ let notificationTimer;
 
 // ------------ FUNCIONES ------------
 
+function createMovieCard(movie) {
+    const movieCard = document.createElement("div");
+    movieCard.classList.add("peli");
+    
+    const poster = movie.Poster === "N/A" ? "https://via.placeholder.com/300x450?text=No+Poster" : movie.Poster;
+
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    const isFavorite = favorites.some(f => f.imdbID === movie.imdbID);
+
+    const buttonHTML = isFavorite 
+    ? `<button class="delete-favorite-btn" data-movie-id="${movie.imdbID}">Eliminar de Favoritos ⭐</button>` 
+    : `<button class="add-favorite-btn" data-movie-id="${movie.imdbID}">Añadir a Favoritos ⭐</button>`;
+
+    movieCard.innerHTML = `
+        <div class="peli-poster">
+            <img src="${poster}">
+        </div>
+        <div class="peli-info">
+            <p class="peli-titulo">${movie.Title}</p>
+            <p class="peli-año">${movie.Year}</p>
+            ${buttonHTML}
+        </div>
+    `;
+
+    return movieCard;
+};
+
 async function getMovies(searchItem) {
     try {
         const response = await fetch(`${API_URL}&s=${searchItem}`);
@@ -36,22 +63,7 @@ function renderMovies(movies) {
     mainContainer.innerHTML = "";
 
     movies.forEach(movie => {
-        const movieCard = document.createElement("div");
-        movieCard.classList.add("peli");
-    
-        const poster = movie.Poster === "N/A" ? "https://via.placeholder.com/300x450?text=No+Poster" : movie.Poster;
-    
-        movieCard.innerHTML = `
-            <div class="peli-poster">
-                <img src="${poster}">
-            </div>
-            <div class="peli-info">
-                <p class="peli-titulo">${movie.Title}</p>
-                <p class="peli-año">${movie.Year}</p>
-                <button class="add-favorite-btn" data-movie-id="${movie.imdbID}">Añadir a Favoritos ⭐</button>
-            </div>
-        `;
-
+        const movieCard = createMovieCard(movie);
         mainContainer.appendChild(movieCard);
     });
 };
@@ -85,6 +97,23 @@ function addFavorite(movieId) {
     favorites.push(movieToAdd);
     localStorage.setItem("favorites", JSON.stringify(favorites));
     showNotification(`¡${movieToAdd.Title} añadida a favoritos!`, "success");
+
+    renderMovies(currentMovies);
+};
+
+function removeFavorite(movieId) {
+    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    const movieToDelete = favorites.find(p => p.imdbID === movieId);
+
+    let newFavorites = favorites.filter(p => p.imdbID !== movieId);
+    localStorage.setItem("favorites", JSON.stringify(newFavorites));
+
+    renderFavorites();
+    
+    if (movieToDelete) {
+        showNotification(`¡${movieToDelete.Title} eliminada de favoritos!`, 'success');
+    }
 };
 
 function renderFavorites() {
@@ -98,22 +127,7 @@ function renderFavorites() {
     }
 
     favorites.forEach(movie => {
-        const movieCard = document.createElement("div");
-        movieCard.classList.add("peli");
-    
-        const poster = movie.Poster === "N/A" ? "https://via.placeholder.com/300x450?text=No+Poster" : movie.Poster;
-    
-        movieCard.innerHTML = `
-            <div class="peli-poster">
-                <img src="${poster}">
-            </div>
-            <div class="peli-info">
-                <p class="peli-titulo">${movie.Title}</p>
-                <p class="peli-año">${movie.Year}</p>
-                <button class="add-favorite-btn" data-movie-id="${movie.imdbID}">Añadir a Favoritos ⭐</button>
-            </div>
-        `;
-
+        const movieCard = createMovieCard(movie);
         mainContainer.appendChild(movieCard);
     });
 }
@@ -124,6 +138,9 @@ mainContainer.addEventListener("click", (e)=> {
     if (e.target.classList.contains("add-favorite-btn")) {
         const movieId = e.target.dataset.movieId;
         addFavorite(movieId);
+    } else if (e.target.classList.contains("delete-favorite-btn")) {
+        const movieId = e.target.dataset.movieId;
+        removeFavorite(movieId);
     }
 });
 
