@@ -19,7 +19,7 @@ Pequeña aplicación web diseñada para buscar información sobre películas uti
 
 1.  Clona este repositorio:
     ```bash
-    git clone [https://github.com/mmmorini/movie-search-app.git](https://github.com/mmmorini/movie-search-app.git)
+    git clone https://github.com/mmmorini/movie-search-app.git
     ```
 2.  Navega a la carpeta del proyecto:
     ```bash
