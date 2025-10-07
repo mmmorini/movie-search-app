@@ -13,23 +13,23 @@ Pequeña aplicación web diseñada para buscar información sobre películas uti
 * HTML5
 * CSS3
 * JavaScript (ES6+)
-* API de [OMDb API](https://www.omdbapi.com/) - *(o la API que hayas usado)*
+* API de [OMDb API](https://www.omdbapi.com/)
 
 ## ¿Cómo Empezar?
 
 1.  Clona este repositorio:
     ```bash
-    git clone [https://github.com/mmmorini/nombre-de-tu-repo-peliculas.git](https://github.com/mmmorini/nombre-de-tu-repo-peliculas.git)
+    git clone [https://github.com/mmmorini/movie-search-app.git](https://github.com/mmmorini/movie-search-app.git)
     ```
 2.  Navega a la carpeta del proyecto:
     ```bash
-    cd nombre-de-tu-repo-peliculas
+    cd movie-search-app
     ```
 3.  Abre `index.html` en tu navegador para ver la aplicación.
 
 ## Demo en Vivo
 
-[Enlace al deploy en vivo aquí](URL_DEL_DEPLOY_AQUI) *(Lo actualizaremos después del deploy)*
+[Enlace al deploy en vivo aquí](URL_DEL_DEPLOY_AQUI)
 
 ## Contacto
 
