@@ -8,7 +8,7 @@ const favoritesBtn = document.querySelector(".favorites-btn");
 // ------------ VARIABLES ------------
 
 const API_KEY = 'cbb2cc40';
-const API_URL = `http://www.omdbapi.com/?apikey=${API_KEY}`;
+const API_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 let currentMovies = [];
 let notificationTimer;
 
